@@ -2,8 +2,17 @@
 
 Selamat datang di aplikasi REST API AnekaZoo yang ditulis dalam bahasa Go! Aplikasi ini dirancang untuk mengelola data hewan dengan menggunakan RESTful API.
 
+## Daftar Isi
+- [Fitur Utama](#fitur-utama)
+- [Prasyarat](#prasyarat)
+- [Daftar Library](#daftar-library)
+- [Cara Menjalankan Aplikasi](#cara-menjalankan-aplikasi)
+- [Alamat API](#alamat-api)
+- [Informasi Tambahan](#informasi-tambahan)
+- [Kontak](#kontak)
 
-📄 Fitur Utama
+
+## 📄 Fitur Utama
 - Mengambil Daftar Semua Hewan
 - Menambahkan Data Hewan Baru
 - Mengambil Detail Hewan Berdasarkan ID
@@ -11,13 +20,13 @@ Selamat datang di aplikasi REST API AnekaZoo yang ditulis dalam bahasa Go! Aplik
 - Menghapus Data Hewan dari Database
 
 
-📚 Prasyarat
+## 📚 Prasyarat
 Sebelum menjalankan aplikasi ini, pastikan Anda telah menginstal:
 - [Docker](https://www.docker.com/get-started)
 - [Go](https://golang.org/dl/)
 
 
-📚 Daftar Library
+## 📚 Daftar Library
 
 Pastikan sudah mengunduh semua library yang diperlukan. Jalankan perintah berikut untuk mengunduh semua library Go yang dibutuhkan:
 
@@ -33,7 +42,7 @@ Berikut adalah beberapa library penting yang harus di-install:
 - net/http
 
 
-🚀 Cara Menjalankan Aplikasi
+## 🚀 Cara Menjalankan Aplikasi
 1. Menjalankan Sistem Penyimpanan
 Untuk menjalankan sistem penyimpanan menggunakan Docker, gunakan perintah berikut:
 
@@ -49,7 +58,7 @@ go run main.go
 Aplikasi ini akan berjalan di localhost:8080.  
 
 
-📥 Alamat API
+## 📥 Alamat API
 Berikut adalah alamat API yang dapat Anda akses:
 
 - **GET /zoos** : Mengambil Daftar Semua Hewan
@@ -59,7 +68,7 @@ Berikut adalah alamat API yang dapat Anda akses:
 - **DELETE /zoos/{id}** :Menghapus Data Hewan dari Database
 
 
-📝 Informasi Tambahan
+## 📝 Informasi Tambahan
 - Pastikan semua dependensi telah terinstal sebelum menjalankan aplikasi.
 - Aplikasi ini menggunakan GORM untuk ORM dan Gorilla Mux untuk routing.
 - Anda dapat menambahkan, mengedit, dan menghapus data hewan melalui API.
@@ -67,7 +76,7 @@ Berikut adalah alamat API yang dapat Anda akses:
 - Jika Anda mengalami masalah, periksa log di konsol untuk informasi lebih lanjut.
 
 
-📬 Kontak
+## 📬 Kontak
 Jika Anda memiliki pertanyaan, silakan hubungi saya di:
 - **Email:** septianidrp@gmail.com
 
