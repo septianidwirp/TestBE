@@ -1,16 +1,6 @@
-🦁 Aplikasi REST API AnekaZoo🦒
+## 🦁 Aplikasi REST API AnekaZoo🦒
 
 Selamat datang di aplikasi REST API AnekaZoo yang ditulis dalam bahasa Go! Aplikasi ini dirancang untuk mengelola data hewan dengan menggunakan RESTful API.
-
-## Daftar Isi
-- [Fitur Utama](#fitur-utama)
-- [Prasyarat](#prasyarat)
-- [Daftar Library](#daftar-library)
-- [Cara Menjalankan Aplikasi](#cara-menjalankan-aplikasi)
-- [Alamat API](#alamat-api)
-- [Informasi Tambahan](#informasi-tambahan)
-- [Kontak](#kontak)
-
 
 ## 📄 Fitur Utama
 - Mengambil Daftar Semua Hewan
