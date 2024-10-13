@@ -4,11 +4,11 @@ Selamat datang di aplikasi REST API AnekaZoo yang ditulis dalam bahasa Go! Aplik
 
 
 📄 Fitur Utama
-- Tambah data hewan baru
-- Melihat daftar semua hewan
-- Melihat detail hewan berdasarkan ID
-- Memperbarui data hewan
-- Hapus data hewan dari database
+- Mengambil Daftar Semua Hewan
+- Menambahkan Data Hewan Baru
+- Mengambil Detail Hewan Berdasarkan ID
+- Memperbarui Data Hewan
+- Menghapus Data Hewan dari Database
 
 
 📚 Prasyarat
@@ -30,17 +30,17 @@ Perintah ini akan memulai kontainer Docker yang diperlukan untuk menyimpan data 
 ```bash
 go run main.go
 ```
-    Aplikasi ini akan berjalan di localhost:8080.  
+Aplikasi ini akan berjalan di localhost:8080.  
 
 
 📥 Alamat API
 Berikut adalah alamat API yang dapat Anda akses:
 
-GET /zoos: Mendapatkan daftar semua hewan
-POST /zoos: Menambahkan hewan baru
-GET /zoos/{id}: Mendapatkan detail hewan berdasarkan ID
-PUT /zoos/{id}: Memperbarui data hewan
-DELETE /zoos/{id}: Menghapus hewan dari database
+- **GET /zoos** : Mengambil Daftar Semua Hewan
+- **POST /zoos** :Menambahkan Data Hewan Baru
+- **GET /zoos/{id}** :Mengambil Detail Hewan Berdasarkan ID
+- **PUT /zoos/{id}** :Memperbarui Data Hewan
+- **DELETE /zoos/{id}** :Menghapus Data Hewan dari Database
 
 
 📝 Informasi Tambahan
