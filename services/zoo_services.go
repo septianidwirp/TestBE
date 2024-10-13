@@ -21,12 +21,13 @@ func (s *ZooService) GetZooByID(id int) (models.Zoo, error) {
     return s.Repo.GetByID(id)
 }
 
-func (s *ZooService) UpdateZoo(zoo models.Zoo) error {
-    return s.Repo.Update(zoo)
+func (s *ZooService) UpsertZoo(zoo models.Zoo) (bool, error) {
+    return s.Repo.Upsert(zoo)
 }
 
+
+
 func (s *ZooService) DeleteZoo(id int) error {
-    
     existingZoo, err := s.Repo.GetByID(id) 
     if err != nil {
         return err 

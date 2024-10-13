@@ -9,17 +9,16 @@ import (
     "zoo-backend/models"
     "zoo-backend/services"
     "log" 
+    "fmt" 
 )
 
 type ZooController struct {
     Service *services.ZooService
 }
 
-
 func (c *ZooController) CreateZoo(w http.ResponseWriter, r *http.Request) {
     var zoo models.Zoo
 
-    
     err := json.NewDecoder(r.Body).Decode(&zoo)
     if err != nil {
         w.WriteHeader(http.StatusBadRequest)
@@ -28,7 +27,6 @@ func (c *ZooController) CreateZoo(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    
     if zoo.Name == "" || zoo.Class == "" || zoo.Legs <= 0 {
         w.WriteHeader(http.StatusBadRequest)
         json.NewEncoder(w).Encode(map[string]string{"error": "Invalid data provided"})
@@ -36,16 +34,20 @@ func (c *ZooController) CreateZoo(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-
     id, err := c.Service.CreateZoo(zoo)
     if err != nil {
-        w.WriteHeader(http.StatusInternalServerError)
-        json.NewEncoder(w).Encode(map[string]string{"error": "Failed to create zoo"})
-        log.Printf("CreateZoo failed: %v", err) 
+        if err.Error() == fmt.Sprintf("zoo with ID '%d' already exists", zoo.ID) {
+            w.WriteHeader(http.StatusConflict) 
+            json.NewEncoder(w).Encode(map[string]string{"error": "Zoo with this ID already exists"})
+            log.Printf("CreateZoo conflict: Zoo with ID '%d' already exists", zoo.ID) 
+        } else {
+            w.WriteHeader(http.StatusInternalServerError)
+            json.NewEncoder(w).Encode(map[string]string{"error": "Failed to create zoo"})
+            log.Printf("CreateZoo failed: %v", err) 
+        }
         return
     }
 
-    
     w.WriteHeader(http.StatusCreated)
     json.NewEncoder(w).Encode(map[string]interface{}{
         "message": "Successfully created zoo",
@@ -63,16 +65,16 @@ func (c *ZooController) GetAllZoos(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    
     if len(zoos) == 0 {
-        zoos = []models.Zoo{}
+        http.Error(w, "No zoos found", http.StatusNotFound)
+        log.Printf("GetAllZoos failed: No zoos found") 
+        return
     }
 
     w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusOK)
     json.NewEncoder(w).Encode(zoos)
 
-    
     log.Printf("GetAllZoos succeeded: Returned %d zoos with status %d", len(zoos), http.StatusOK)
 }
 
@@ -84,21 +86,19 @@ func (c *ZooController) GetZooByID(w http.ResponseWriter, r *http.Request) {
     zoo, err := c.Service.GetZooByID(id)
     if err != nil {
         http.Error(w, "Zoo not found", http.StatusNotFound)
-        log.Printf("GetZooByID failed: Zoo with ID %d not found", id)
+        log.Printf("GetZooByID failed: Zoo with ID %d not found", id) 
         return
     }
 
     w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusOK)
     json.NewEncoder(w).Encode(zoo)
-    log.Printf("GetZooByID succeeded: Returned zoo with ID %d", id)
+    log.Printf("GetZooByID succeeded: Returned zoo with ID %d", id) 
 }
-
 
 func (c *ZooController) UpdateZoo(w http.ResponseWriter, r *http.Request) {
     var zoo models.Zoo
 
-    
     err := json.NewDecoder(r.Body).Decode(&zoo)
     if err != nil {
         http.Error(w, "Invalid input", http.StatusBadRequest)
@@ -106,31 +106,36 @@ func (c *ZooController) UpdateZoo(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    
     if zoo.ID == 0 {
         http.Error(w, "Missing Zoo ID", http.StatusBadRequest)
         log.Printf("UpdateZoo failed: Missing Zoo ID") 
         return
     }
 
-    
-    err = c.Service.UpdateZoo(zoo)
+    updated, err := c.Service.UpsertZoo(zoo)
     if err != nil {
-        http.Error(w, "Failed to update zoo", http.StatusInternalServerError)
-        log.Printf("UpdateZoo failed: %v", err) 
+        http.Error(w, "Failed to update or create zoo", http.StatusInternalServerError)
+        log.Printf("UpsertZoo failed: %v", err) 
         return
     }
 
-  
+    var message string
+    if updated {
+        message = fmt.Sprintf("Zoo with ID %d was successfully updated", zoo.ID)
+    } else {
+        message = fmt.Sprintf("Zoo with ID %d not found and successfully created", zoo.ID)
+    }
+
     response := map[string]string{
-        "message": "Zoo updated successfully",
+        "message": message,
     }
 
     w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusOK)
     json.NewEncoder(w).Encode(response)
-    log.Printf("UpdateZoo succeeded: Updated zoo with ID %d", zoo.ID) // Logging
+    log.Printf("UpsertZoo succeeded: %s", message) 
 }
+
 
 
 func (c *ZooController) DeleteZoo(w http.ResponseWriter, r *http.Request) {
