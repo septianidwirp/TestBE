@@ -19,7 +19,6 @@ Anda dapat melihat dokumentasi API melalui Postman pada link berikut:
 
 ## 📚 Prasyarat
 Sebelum menjalankan aplikasi ini, pastikan Anda telah menginstal:
-- [Docker](https://www.docker.com/get-started)
 - [Go](https://golang.org/dl/)
 
 
@@ -40,13 +39,7 @@ Berikut adalah beberapa library penting yang harus di-install:
 
 
 ## 🚀 Cara Menjalankan Aplikasi
-1. Menjalankan Sistem Penyimpanan
-Untuk menjalankan sistem penyimpanan menggunakan Docker, gunakan perintah berikut:
-
-```bash
-docker-compose -f docker-storage.yaml up -d
-```
-Perintah ini akan memulai kontainer Docker yang diperlukan untuk menyimpan data aplikasi.
+1. Pastikan semua dependensi dan library telah terinstal sebelum menjalankan aplikasi.
 
 2. Setelah sistem penyimpanan berjalan, Anda dapat menjalankan aplikasi dengan perintah berikut:
 ```bash
@@ -66,7 +59,6 @@ Berikut adalah alamat API yang dapat Anda akses:
 
 
 ## 📝 Informasi Tambahan
-- Pastikan semua dependensi telah terinstal sebelum menjalankan aplikasi.
 - Aplikasi ini menggunakan GORM untuk ORM dan Gorilla Mux untuk routing.
 - Anda dapat menambahkan, mengedit, dan menghapus data hewan melalui API.
 - Untuk pengujian, Anda dapat menggunakan Postman atau alat serupa untuk menguji endpoint API.
