@@ -2,6 +2,13 @@
 
 Selamat datang di aplikasi REST API AnekaZoo yang ditulis dalam bahasa Go! Aplikasi ini dirancang untuk mengelola data hewan dengan menggunakan RESTful API.
 
+
+## 📄 Postman Documentation
+Anda dapat melihat dokumentasi API melalui Postman pada link berikut:
+
+[Postman API Documentation](https://documenter.getpostman.com/view/37642908/2sAXxS9Bor)
+
+
 ## 📄 Fitur Utama
 - Mengambil Daftar Semua Hewan
 - Menambahkan Data Hewan Baru
