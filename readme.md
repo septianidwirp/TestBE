@@ -17,6 +17,22 @@ Sebelum menjalankan aplikasi ini, pastikan Anda telah menginstal:
 - [Go](https://golang.org/dl/)
 
 
+📚 Daftar Library
+
+Pastikan sudah mengunduh semua library yang diperlukan. Jalankan perintah berikut untuk mengunduh semua library Go yang dibutuhkan:
+
+```bash
+go mod tidy
+```
+
+Berikut adalah beberapa library penting yang harus di-install:
+- github.com/gorilla/mux
+- github.com/jinzhu/gorm
+- github.com/go-sql-driver/mysql
+- log
+- net/http
+
+
 🚀 Cara Menjalankan Aplikasi
 1. Menjalankan Sistem Penyimpanan
 Untuk menjalankan sistem penyimpanan menggunakan Docker, gunakan perintah berikut:
